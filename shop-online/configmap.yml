@@ -5,6 +5,6 @@ metadata:
     name: shop-online-config
 data:
     MONGO_DB_HOST: mongodb-svc
-    REACT_APP_API_URL: https://backend.spider-shlomo.com
+    REACT_APP_API_URL: http://10.98.123.86:5050
     MONGO_INITDB_ROOT_USERNAME: root 
     MONGO_INITDB_ROOT_PASSWORD: 09mkl;dasd
