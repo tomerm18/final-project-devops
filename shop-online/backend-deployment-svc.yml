@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: shop-online
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: backend
+      containers:
+      - name: backend
+        image: shlomobarzili/flask-backend:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 5050
+          protocol: TCP
+
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+
+        env:
+          - name: MONGO_DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: shop-online-config
+                key: MONGO_DB_HOST
+
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: shop-online-config   
+                key: MONGO_INITDB_ROOT_USERNAME
+
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: shop-online-config 
+                key: MONGO_INITDB_ROOT_PASSWORD
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-svc
+  namespace: shop-online # the namespace that sperate the pods between envroments.
+spec:
+  selector:
+    app: backend
+  type: ClusterIP # the type of the service
+  ports:
+    - protocol: TCP
+      port: 5050   # the port svc that expose
+      targetPort: 5050 # the port of the pod | container

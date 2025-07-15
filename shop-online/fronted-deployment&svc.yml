@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fronted
+  namespace: shop-online
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fronted
+  template:
+    metadata:
+      labels:
+        app: fronted
+    spec:
+         # podAntiAffinity the pods will be runing on different nodes
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: fronted
+      containers:
+      - name: fronted
+        image: shlomobarzili/react-fronted:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
+        env:
+          - name: REACT_APP_API_URL
+            valueFrom:
+              configMapKeyRef:
+                name: shop-online-config
+                key: REACT_APP_API_URL
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fronted-svc
+  namespace: shop-online # the namespace that sperate the pods between envroments.
+spec:
+  selector:
+    app: fronted
+  type: ClusterIP # the type of the service
+  ports:
+    - protocol: TCP
+      port: 3000   # the port svc that expose
+      targetPort: 3000 # the port of the pod
