@@ -5,6 +5,6 @@ metadata:
     name: shop-online-config
 data:
     MONGO_DB_HOST: mongodb-svc
-    REACT_APP_API_URL: http://10.98.123.86:5050
+    REACT_APP_API_URL: http://192.168.61.129:30007
     MONGO_INITDB_ROOT_USERNAME: root 
     MONGO_INITDB_ROOT_PASSWORD: 09mkl;dasd
