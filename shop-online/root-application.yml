@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/shlomo-b/Shop-Online.git
-    path: ./apps/shop-online
+    repoURL: https://github.com/tomerm18/final-project-devops.git
+    path: shop-online
   destination:
     server: https://kubernetes.default.svc
     namespace: shop-online
