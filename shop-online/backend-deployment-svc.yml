@@ -65,8 +65,8 @@ metadata:
 spec:
   selector:
     app: backend
-  type: ClusterIP # the type of the service
+    type: NodePort # the type of the service
   ports:
     - protocol: TCP
       port: 5050   # the port svc that expose
-      targetPort: 5050 # the port of the pod | container
+      nodePort: 30007

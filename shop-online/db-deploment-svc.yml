@@ -65,7 +65,7 @@ metadata:
 spec:
   selector:
     app: mongodb
-  type: ClusterIP
+  nodePort: 30007
   ports:
     - protocol: TCP
       port: 27017

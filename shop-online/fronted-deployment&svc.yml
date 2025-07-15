@@ -53,8 +53,9 @@ metadata:
 spec:
   selector:
     app: fronted
-  type: ClusterIP # the type of the service
+  type: NodePort # the type of the service
   ports:
     - protocol: TCP
       port: 3000   # the port svc that expose
       targetPort: 3000 # the port of the pod
+      nodePort: 30008
