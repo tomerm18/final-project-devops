@@ -22,7 +22,7 @@ spec:
               app: backend
       containers:
       - name: backend
-        image: shlomobarzili/flask-backend:latest
+        image: tomer8/backend:v1.1.0
         imagePullPolicy: Always
         ports:
         - name: http

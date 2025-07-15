@@ -23,7 +23,7 @@ spec:
               app: fronted
       containers:
       - name: fronted
-        image: shlomobarzili/react-fronted:latest
+        image: tomer8/react-fronted
         imagePullPolicy: Always
         ports:
         - name: http
