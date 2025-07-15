@@ -64,8 +64,8 @@ metadata:
   namespace: shop-online
 spec:
   selector:
-    app: ClusterIp
-  nodePort: 30007
+    app: mongodb
+  type: ClusterIp
   ports:
     - protocol: TCP
       port: 27017
