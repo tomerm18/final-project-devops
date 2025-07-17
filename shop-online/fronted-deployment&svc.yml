@@ -25,7 +25,7 @@ spec:
               app: fronted
       containers:
       - name: fronted
-        image: tomer8/react-fronted:v1.1.1
+        image: tomer8/react-fronted:v1.1.2
         imagePullPolicy: Always
         ports:
         - name: http
