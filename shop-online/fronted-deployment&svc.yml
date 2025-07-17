@@ -1,5 +1,6 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: 
+
 metadata:
   name: fronted
   namespace: shop-online
@@ -9,6 +10,7 @@ spec:
     matchLabels:
       app: fronted
   template:
+
     metadata:
       labels:
         app: fronted
