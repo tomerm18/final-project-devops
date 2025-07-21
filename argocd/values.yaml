@@ -1,7 +1,7 @@
 server:
   service:
     type: NodePort
-    nodePortHttp: 30080
+    nodePortHttp: 30080 #לקחתי את הערך של הארגו ופשוט דרסתי אותם לצרכיי
     nodePortHttps: 30443
     servicePortHttp: 80
     servicePortHttps: 443

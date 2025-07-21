@@ -4,10 +4,10 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'shop-online-app/**'
+      - 'shop-online-app/frontend/**'
   pull_request:
     paths:
-      - 'shop-online-app/**'
+      - 'shop-online-app/frontend/**'
 
 jobs:
   docker:
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 #work withe TAG in repo
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
