@@ -1,13 +1,13 @@
-name: Docker Image CI sbackend
+name: Docker Image CI backend
 
 on:
   push:
     branches: [ "main" ]
     paths:
-      - 'shop-online-app/**'
+      - 'shop-online-app/backend/**'
   pull_request:
     paths:
-      - 'shop-online-app/**'
+      - 'shop-online-app/backend/**'
 
 jobs:
   docker:
