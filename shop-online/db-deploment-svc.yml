@@ -24,7 +24,7 @@ spec:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - node1
+                      - tomer
       containers:
       - name: mongodb
         image: mongo
