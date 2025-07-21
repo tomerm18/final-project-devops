@@ -48,13 +48,13 @@ spec:
             cpu: 200m
             memory: 256Mi
 
-      #   volumeMounts:
-      #   - name:  mongo-pvc
-      #     mountPath: /data/db # default path should be /data/db its for mongodb
-      # volumes:
-      #   - name: mongo-pvc
-      #     persistentVolumeClaim:
-      #       claimName: mongo-pvc    
+        volumeMounts:
+        - name:  mongo-pvc
+          mountPath: /data/db # default path should be /data/db its for mongodb
+      volumes:
+        - name: mongo-pvc
+          persistentVolumeClaim:
+            claimName: mongo-pvc    
 
 ---
 apiVersion: v1
