@@ -1,3 +1,5 @@
+# --- Deployment ---
+# This defines how to run the MongoDB pod.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,26 +22,25 @@ spec:
         image: mongo
         ports:
         - containerPort: 27017
-
         env:
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
               configMapKeyRef:
                 name: shop-online-config
                 key: MONGO_INITDB_ROOT_USERNAME
-                
           - name: MONGO_INITDB_ROOT_PASSWORD
             valueFrom:
               configMapKeyRef:
                 name: shop-online-config
                 key: MONGO_INITDB_ROOT_PASSWORD
-
+          # MONGO_DB_HOST is not a standard MongoDB environment variable.
+          # The application connecting to Mongo will use this, not the database itself.
+          # It's kept here assuming another part of your system needs it.
           - name: MONGO_DB_HOST
             valueFrom:
               configMapKeyRef:
                 name: shop-online-config
                 key: MONGO_DB_HOST
-
         resources:
           requests:
             cpu: 100m
@@ -47,16 +48,20 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
-
         volumeMounts:
-        - name:  mongo-pvc
-          mountPath: /data/db # default path should be /data/db its for mongodb
+        # This mount links to the volume defined below.
+        - name: mongodb-data-volume # Changed for clarity
+          # This is the path inside the container where the data will be stored.
+          mountPath: /data/db
       volumes:
-        - name: mongo-pvc
-          persistentVolumeClaim:
-            claimName: mongo-pvc    
-
+      # This defines the volume and links it to the PVC.
+      - name: mongodb-data-volume # This name must match the volumeMounts.name above.
+        persistentVolumeClaim:
+          # This must match the metadata.name of your PVC.
+          claimName: mongodb-pvc # Corrected to match the PVC's actual name.
 ---
+# --- Service ---
+# This exposes the MongoDB deployment within the cluster.
 apiVersion: v1
 kind: Service
 metadata:
