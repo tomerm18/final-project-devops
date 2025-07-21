@@ -1,15 +1,15 @@
-# --- PersistentVolumeClaim (PVC) ---
-# This requests storage from the StorageClass.
-# IMPORTANT: It must be in the same namespace as the Deployment.
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mongodb-pvc # Corrected name to be consistent
-  namespace: shop-online # Added namespace to match the Deployment
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: local-path
+# # --- PersistentVolumeClaim (PVC) ---
+# # This requests storage from the StorageClass.
+# # IMPORTANT: It must be in the same namespace as the Deployment.
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: mongodb-pvc # Corrected name to be consistent
+#   namespace: shop-online # Added namespace to match the Deployment
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi
+#   storageClassName: local-path
